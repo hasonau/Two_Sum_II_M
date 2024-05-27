@@ -5,24 +5,23 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& numbers, int target) {
+    vector<int> twoSum(const vector<int>& numbers, int target) {
         int start = 0;
-        int reversePointer = numbers.size() - 1;
-        vector<int> result;
-        while (start < reversePointer) {
-            if (numbers[start] + numbers[reversePointer] == target) {
-                result.push_back(start + 1);
-                result.push_back(reversePointer + 1);
-                return result;
-            }
-            else if (numbers[start] + numbers[reversePointer] > target) {
-                reversePointer--;
-            }
-            else {
+        int end = numbers.size() - 1;
+
+        while (start < end) {
+            int sum = numbers[start] + numbers[end];
+            if (sum == target) {
+                // Return 1-based indices as required
+                return {start + 1, end + 1};
+            } else if (sum > target) {
+                end--;
+            } else {
                 start++;
             }
         }
-        return result;
+        // Return an empty vector if no solution is found
+        return {};
     }
 };
 
